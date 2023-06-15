@@ -13,7 +13,7 @@ import java.util.Optional;
 @RequestMapping("/users")
 public class UsuarioController {
     @Autowired
-    //private UsuarioRepositorio repository;
+
     private UsuarioService service;
     @GetMapping()
     public List<Usuario> getUsers(){
