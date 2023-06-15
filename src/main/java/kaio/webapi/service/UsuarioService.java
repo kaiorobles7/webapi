@@ -23,16 +23,15 @@ public class UsuarioService {
         return repository.findAll();
     }
 
-    public Optional<Usuario> buscarUsuario(Long id) {
+    public List<Usuario> buscarUsuario(String login) {
         // Lógica para buscar um usuário pelo ID
-        return repository.findById(id);
+        return repository.findByLogin(login);
     }
 
-    public Optional<Usuario> atualizarUsuario(Long id, Usuario usuario) {//put
+    public Optional<Usuario> atualizarUsuario( Usuario usuario) {//put
         // Lógica para atualizar um usuário existente
-        Optional<Usuario> usuarioExistente = repository.findById(id);
+        Optional<Usuario> usuarioExistente = repository.findById(usuario.getId());
         if (usuarioExistente.isPresent()) {
-            usuario.setId(id);
             return Optional.of(repository.save(usuario));
         }
         return Optional.empty();

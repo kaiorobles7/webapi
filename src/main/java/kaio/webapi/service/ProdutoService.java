@@ -17,18 +17,26 @@ public class ProdutoService {
         this.prepository = prepository;
     }
 
-    public Produto criarUsuario(Produto produto) {
+    public Produto criarProduto(Produto produto) {
         // Lógica para criar um novo usuário
         return prepository.save(produto);
     }
+    public Optional<Produto> atualizarProduto(Produto produto) {//put
 
-    public List<Produto> buscarUsuarios(){
+        Optional<Produto> usuarioExistente = prepository.findById(produto.getId());
+        if (usuarioExistente.isPresent()) {
+            return Optional.of(prepository.save(produto));
+        }
+        return Optional.empty();
+    }
+
+    public List<Produto> buscarProduto(){
         return prepository.findAll();
     }
 
-    public Optional<Produto> buscarUsuario(Long id) {
+    public List<Produto> buscarProduto(String nome) {
         // Lógica para buscar um usuário pelo ID
-        return prepository.findById(id);
+        return prepository.findByNome(nome);
     }
 
     public Optional<Produto> atualizarUsuario(Long id, Produto produto) {//put

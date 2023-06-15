@@ -17,8 +17,11 @@ public class UsuarioController {
     private UsuarioService service;
     @GetMapping()
     public List<Usuario> getUsers(){
-      //  return repository.findAll();
         return service.buscarUsuarios();
+    }
+    @GetMapping("/{login}")
+    public List<Usuario> getUsers(@PathVariable String login){
+        return service.buscarUsuario(login);
     }
 @PostMapping("/create")
     public Usuario createUsers(@RequestBody Usuario usuario){
@@ -26,7 +29,7 @@ public class UsuarioController {
 }
 @PutMapping("/atualizar")
     public Optional<Usuario> putUsers(@RequestBody Usuario usuario){
-        return Optional.ofNullable(service.criarUsuario(usuario));
+        return service.atualizarUsuario(usuario);
 }
 @DeleteMapping("/delete/{id}")
     public List<Usuario> deleteUsers(@PathVariable Long id){
