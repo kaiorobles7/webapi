@@ -1,10 +1,17 @@
 package kaio.webapi.model;
 
+import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
 
+@Entity
+@Table(name = "usuarios")
 public class Usuario {
     @Getter
-    private Integer id;
+    @Setter
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @Getter
     private String login;
     @Getter
