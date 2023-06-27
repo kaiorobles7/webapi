@@ -16,6 +16,9 @@ public class Usuario {
     private String login;
     @Getter
     private String password;
+    @Getter @Setter
+    @ManyToOne
+    private Setor setor;
     public Usuario() {}
     public Usuario(String login, String password) {
         this.login = login;
@@ -26,6 +29,8 @@ public class Usuario {
         return "User{" +
                 "login='" + login + '\'' +
                 ", password='" + password + '\'' +
+                ",setor='" + setor + '\''  +
                 '}';
     }
+
 }

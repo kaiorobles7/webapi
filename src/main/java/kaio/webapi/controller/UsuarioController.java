@@ -2,6 +2,7 @@ package kaio.webapi.controller;
 
 
 import kaio.webapi.model.Usuario;
+import kaio.webapi.service.SetorService;
 import kaio.webapi.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,8 +14,10 @@ import java.util.Optional;
 @RequestMapping("/users")
 public class UsuarioController {
     @Autowired
-
     private UsuarioService service;
+
+    @Autowired
+    private SetorService setorService;
     @GetMapping()
     public List<Usuario> getUsers(){
         return service.buscarUsuarios();
@@ -23,16 +26,23 @@ public class UsuarioController {
     public List<Usuario> getUsers(@PathVariable String login){
         return service.buscarUsuario(login);
     }
-@PostMapping("/create")
+    @PostMapping("/create")
     public Usuario createUsers(@RequestBody Usuario usuario){
         return service.criarUsuario(usuario);
 }
-@PutMapping("/atualizar")
+    @PutMapping("/atualizar")
     public Optional<Usuario> putUsers(@RequestBody Usuario usuario){
         return service.atualizarUsuario(usuario);
 }
-@DeleteMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public List<Usuario> deleteUsers(@PathVariable Long id){
         return service.deletarUsuario(id);
 }
+
+    @PutMapping("/atualizaSetor/{setorId}")
+    public List<Usuario> atualizarUsuariosComSetor(@PathVariable Long setorId, @RequestBody List<Usuario> usuarios) {
+        return service.atualizarUsuariosComSetor(setorId, usuarios);
+    }
+
 }
+

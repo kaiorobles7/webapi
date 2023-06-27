@@ -1,6 +1,8 @@
 package kaio.webapi.service;
 
+import kaio.webapi.model.Setor;
 import kaio.webapi.model.Usuario;
+import kaio.webapi.repository.SetorRepositorio;
 import kaio.webapi.repository.UsuarioRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,9 @@ public class UsuarioService {
 
     @Autowired
     private UsuarioRepositorio repository;
+
+    @Autowired
+    private SetorRepositorio setorRepositorio;
 
     public Usuario criarUsuario(Usuario usuario) {
         // Lógica para criar um novo usuário
@@ -41,5 +46,18 @@ public class UsuarioService {
             repository.deleteById(id);
       return repository.findAll();
     }
+
+    public List<Usuario> atualizarUsuariosComSetor(Long setorId, List<Usuario> usuarios) {
+        Optional<Setor> setor = setorRepositorio.findById(setorId);
+
+        for (Usuario usuario : usuarios) {
+            usuario.setSetor(setor.get());
+            repository.save(usuario);
+        }
+
+        return usuarios;
+    }
+
+
 }
 
