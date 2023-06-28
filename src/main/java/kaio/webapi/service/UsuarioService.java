@@ -59,5 +59,10 @@ public class UsuarioService {
     }
 
 
+    public List<Usuario> buscarUsuariosPorSetor(Long setorId) {
+        Optional<Setor> setor = setorRepositorio.findById(setorId);
+       return repository.findBySetor(setor.get());
+
+    }
 }
 

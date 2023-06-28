@@ -26,6 +26,11 @@ public class UsuarioController {
     public List<Usuario> getUsers(@PathVariable String login){
         return service.buscarUsuario(login);
     }
+
+    @GetMapping("/buscarUsuariosPorSetor/{setorId}")
+    public List<Usuario> getBuscaUsuariosporSetor(@PathVariable Long setorId){
+        return service.buscarUsuariosPorSetor(setorId);
+    }
     @PostMapping("/create")
     public Usuario createUsers(@RequestBody Usuario usuario){
         return service.criarUsuario(usuario);
